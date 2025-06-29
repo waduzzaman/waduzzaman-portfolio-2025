@@ -54,7 +54,7 @@ const getBlogPost = (slug: string) => {
       image: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg',
       category: 'React',
       tags: ['React', 'JavaScript', 'Architecture', 'Performance'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2024-01-15',
       readTime: '8 min read',
       featured: true
@@ -103,7 +103,7 @@ const getBlogPost = (slug: string) => {
       image: 'https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg',
       category: 'Next.js',
       tags: ['Next.js', 'React', 'Performance', 'Framework'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2024-01-10',
       readTime: '6 min read',
       featured: true
@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${post.title} | Mahbub E Waduzzaman Blog`,
+    title: `${post.title} | John Doe Blog`,
     description: post.excerpt,
     keywords: post.tags.join(', '),
     openGraph: {
@@ -259,11 +259,11 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
           <div className="flex items-start space-x-4">
             <img
               src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg"
-              alt="Mahbub E Waduzzaman"
+              alt="John Doe"
               className="w-16 h-16 rounded-full object-cover"
             />
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-base-content mb-2">Mahbub E Waduzzaman</h3>
+              <h3 className="text-xl font-bold text-base-content mb-2">John Doe</h3>
               <p className="text-base-content/70 mb-4">
                 Full-stack developer with 5+ years of experience building scalable web applications. 
                 Passionate about React, TypeScript, and modern web technologies.

@@ -71,7 +71,7 @@ const AboutPage = () => {
                 </h1>
                 <div className="w-20 h-1 bg-primary rounded-full mb-6"></div>
                 <p className="text-xl text-base-content/70 leading-relaxed">
-                  I'm Mahbub E Waduzzaman, a passionate full-stack developer dedicated to creating 
+                  I am Mahbub E Waduzzaman, a passionate full-stack developer dedicated to creating 
                   exceptional digital experiences that make a real impact.
                 </p>
               </div>
@@ -120,16 +120,16 @@ const AboutPage = () => {
             </p>
             
             <p className="leading-relaxed mb-8">
-              Over the years, I've had the privilege of working with startups, established 
+              Over the years, I have had the privilege of working with startups, established 
               companies, and individual clients, each project teaching me something new. 
-              I've seen firsthand how the right technology can transform businesses and 
-              improve people's lives, which continues to motivate me every day.
+              I have seen firsthand how the right technology can transform businesses and 
+              improve people lives, which continues to motivate me every day.
             </p>
             
             <p className="leading-relaxed mb-8">
               Today, I specialize in full-stack development with a focus on React ecosystem, 
               Node.js, and cloud technologies. I believe in writing clean, maintainable code 
-              and creating user experiences that are both beautiful and functional. When I'm 
+              and creating user experiences that are both beautiful and functional. When I am 
               not coding, I enjoy contributing to open-source projects, mentoring junior 
               developers, and staying up-to-date with the latest industry trends.
             </p>

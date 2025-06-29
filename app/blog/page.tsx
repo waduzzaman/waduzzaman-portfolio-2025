@@ -1,15 +1,13 @@
+'use client';
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { useState } from 'react';
 import { Calendar, Clock, User, ArrowRight, Tag } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Blog - Mahbub E Waduzzaman | Web Development Tips, Tutorials & Industry Insights',
-  description: 'Read the latest web development articles, tutorials, and industry insights from Mahbub E Waduzzaman. Topics include React, Next.js, TypeScript, and modern web development practices.',
-  keywords: 'web development blog, react tutorials, next.js tips, javascript articles, programming insights, tech blog',
-};
 
 const BlogPage = () => {
   const categories = ['All', 'React', 'Next.js', 'JavaScript', 'TypeScript', 'UI/UX', 'Career'];
+  const [activeCategory, setActiveCategory] = useState('All');
   
   const blogPosts = [
     {
@@ -21,7 +19,7 @@ const BlogPage = () => {
       image: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg',
       category: 'React',
       tags: ['React', 'JavaScript', 'Architecture', 'Performance'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2024-01-15',
       readTime: '8 min read',
       featured: true
@@ -35,7 +33,7 @@ const BlogPage = () => {
       image: 'https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg',
       category: 'Next.js',
       tags: ['Next.js', 'React', 'Performance', 'Framework'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2024-01-10',
       readTime: '6 min read',
       featured: true
@@ -49,7 +47,7 @@ const BlogPage = () => {
       image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg',
       category: 'TypeScript',
       tags: ['TypeScript', 'Code Quality', 'Development'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2024-01-05',
       readTime: '10 min read',
       featured: false
@@ -63,7 +61,7 @@ const BlogPage = () => {
       image: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg',
       category: 'Career',
       tags: ['Trends', 'Web Development', 'Future', 'Technology'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2023-12-28',
       readTime: '12 min read',
       featured: true
@@ -77,7 +75,7 @@ const BlogPage = () => {
       image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg',
       category: 'UI/UX',
       tags: ['CSS', 'UI Design', 'Frontend', 'Responsive'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2023-12-20',
       readTime: '7 min read',
       featured: false
@@ -91,15 +89,48 @@ const BlogPage = () => {
       image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg',
       category: 'JavaScript',
       tags: ['JavaScript', 'Performance', 'Optimization', 'Best Practices'],
-      author: 'Mahbub E Waduzzaman',
+      author: 'John Doe',
       publishedAt: '2023-12-15',
       readTime: '9 min read',
+      featured: false
+    },
+    {
+      id: 7,
+      title: 'Building Accessible React Components',
+      slug: 'accessible-react-components',
+      excerpt: 'A comprehensive guide to building accessible React components that work for everyone, including users with disabilities.',
+      content: `Accessibility is not optional in modern web development. Learn how to build React components that are inclusive and accessible to all users...`,
+      image: 'https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg',
+      category: 'React',
+      tags: ['React', 'Accessibility', 'Inclusive Design', 'Best Practices'],
+      author: 'John Doe',
+      publishedAt: '2023-12-10',
+      readTime: '11 min read',
+      featured: false
+    },
+    {
+      id: 8,
+      title: 'Career Growth for Frontend Developers',
+      slug: 'career-growth-frontend-developers',
+      excerpt: 'Practical advice for frontend developers looking to advance their careers, from skill development to networking and leadership.',
+      content: `Growing your career as a frontend developer requires more than just technical skills. Here's a roadmap for professional development...`,
+      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg',
+      category: 'Career',
+      tags: ['Career', 'Professional Development', 'Frontend', 'Leadership'],
+      author: 'John Doe',
+      publishedAt: '2023-12-05',
+      readTime: '8 min read',
       featured: false
     }
   ];
 
-  const featuredPosts = blogPosts.filter(post => post.featured);
-  const recentPosts = blogPosts.filter(post => !post.featured);
+  // Filter posts based on active category
+  const filteredPosts = activeCategory === 'All' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === activeCategory);
+
+  const featuredPosts = filteredPosts.filter(post => post.featured);
+  const recentPosts = filteredPosts.filter(post => !post.featured);
 
   return (
     <div className="pt-20">
@@ -119,150 +150,103 @@ const BlogPage = () => {
         </div>
       </section>
 
-      {/* Featured Posts */}
-      <section className="py-20 bg-base-200">
+      {/* Filter Tabs */}
+      <section className="py-12 bg-base-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-bold text-base-content">Featured Articles</h2>
-            <div className="hidden md:flex space-x-2">
-              {categories.map((category, index) => (
-                <button
-                  key={index}
-                  className={`btn btn-sm ${index === 0 ? 'btn-primary' : 'btn-ghost'}`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {featuredPosts.map((post, index) => (
-              <article
-                key={post.id}
-                className="group bg-base-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveCategory(category)}
+                className={`btn btn-sm transition-all duration-200 ${
+                  activeCategory === category 
+                    ? 'btn-primary' 
+                    : 'btn-ghost hover:btn-primary hover:btn-outline'
+                }`}
               >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-primary text-primary-content px-3 py-1 rounded-full text-xs font-medium">
-                      Featured
-                    </span>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-base-100/90 text-base-content px-2 py-1 rounded-md text-xs font-medium">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <div className="flex items-center space-x-4 text-sm text-base-content/60 mb-3">
-                    <div className="flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-1" />
-                      {post.readTime}
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-base-content mb-3 group-hover:text-primary transition-colors">
-                    <Link href={`/blog/${post.slug}`}>
-                      {post.title}
-                    </Link>
-                  </h3>
-
-                  <p className="text-base-content/70 text-sm leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.slice(0, 3).map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="bg-primary/10 text-primary px-2 py-1 rounded text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="inline-flex items-center text-primary hover:text-primary-focus font-medium text-sm group"
-                  >
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </article>
+                {category}
+                {category !== 'All' && (
+                  <span className="ml-2 badge badge-sm">
+                    {blogPosts.filter(p => p.category === category).length}
+                  </span>
+                )}
+              </button>
             ))}
+          </div>
+          
+          {/* Results count */}
+          <div className="text-center">
+            <p className="text-base-content/60 text-sm">
+              Showing {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''}
+              {activeCategory !== 'All' && ` in ${activeCategory}`}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Recent Posts */}
-      <section className="py-20 bg-base-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-base-content mb-12">Recent Articles</h2>
+      {/* Featured Posts */}
+      {featuredPosts.length > 0 && (
+        <section className="py-20 bg-base-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold text-base-content mb-4">
+                {activeCategory === 'All' ? 'Featured Articles' : `Featured ${activeCategory} Articles`}
+              </h2>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {recentPosts.map((post) => (
-              <article
-                key={post.id}
-                className="group bg-base-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1"
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-base-100/90 text-base-content px-2 py-1 rounded text-xs font-medium">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <div className="flex items-center space-x-3 text-xs text-base-content/60 mb-3">
-                    <div className="flex items-center">
-                      <Calendar className="w-3 h-3 mr-1" />
-                      {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric'
-                      })}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {featuredPosts.map((post, index) => (
+                <article
+                  key={post.id}
+                  className="group bg-base-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-primary text-primary-content px-3 py-1 rounded-full text-xs font-medium">
+                        Featured
+                      </span>
                     </div>
-                    <div className="flex items-center">
-                      <Clock className="w-3 h-3 mr-1" />
-                      {post.readTime}
+                    <div className="absolute top-4 right-4">
+                      <span className="bg-base-100/90 text-base-content px-2 py-1 rounded-md text-xs font-medium">
+                        {post.category}
+                      </span>
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-base-content mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                    <Link href={`/blog/${post.slug}`}>
-                      {post.title}
-                    </Link>
-                  </h3>
+                  <div className="p-6">
+                    <div className="flex items-center space-x-4 text-sm text-base-content/60 mb-3">
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </div>
+                      <div className="flex items-center">
+                        <Clock className="w-4 h-4 mr-1" />
+                        {post.readTime}
+                      </div>
+                    </div>
 
-                  <p className="text-base-content/70 text-sm leading-relaxed mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
+                    <h3 className="text-xl font-bold text-base-content mb-3 group-hover:text-primary transition-colors">
+                      <Link href={`/blog/${post.slug}`}>
+                        {post.title}
+                      </Link>
+                    </h3>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-wrap gap-1">
-                      {post.tags.slice(0, 2).map((tag, tagIndex) => (
+                    <p className="text-base-content/70 text-sm leading-relaxed mb-4">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.slice(0, 3).map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
                           className="bg-primary/10 text-primary px-2 py-1 rounded text-xs"
@@ -271,19 +255,115 @@ const BlogPage = () => {
                         </span>
                       ))}
                     </div>
+
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="text-primary hover:text-primary-focus text-sm font-medium"
+                      className="inline-flex items-center text-primary hover:text-primary-focus font-medium text-sm group"
                     >
-                      Read →
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* Recent Posts */}
+      {recentPosts.length > 0 && (
+        <section className="py-20 bg-base-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-base-content mb-12">
+              {activeCategory === 'All' ? 'Recent Articles' : `Recent ${activeCategory} Articles`}
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {recentPosts.map((post, index) => (
+                <article
+                  key={post.id}
+                  className="group bg-base-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 animate-fade-in-up"
+                  style={{ animationDelay: `${(featuredPosts.length + index) * 0.1}s` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <span className="bg-base-100/90 text-base-content px-2 py-1 rounded text-xs font-medium">
+                        {post.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="flex items-center space-x-3 text-xs text-base-content/60 mb-3">
+                      <div className="flex items-center">
+                        <Calendar className="w-3 h-3 mr-1" />
+                        {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </div>
+                      <div className="flex items-center">
+                        <Clock className="w-3 h-3 mr-1" />
+                        {post.readTime}
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-base-content mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      <Link href={`/blog/${post.slug}`}>
+                        {post.title}
+                      </Link>
+                    </h3>
+
+                    <p className="text-base-content/70 text-sm leading-relaxed mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex flex-wrap gap-1">
+                        {post.tags.slice(0, 2).map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="bg-primary/10 text-primary px-2 py-1 rounded text-xs"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="text-primary hover:text-primary-focus text-sm font-medium"
+                      >
+                        Read →
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* No Results */}
+      {filteredPosts.length === 0 && (
+        <section className="py-20 bg-base-100">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-base-content/60 text-lg">No articles found in this category.</p>
+            <button
+              onClick={() => setActiveCategory('All')}
+              className="btn btn-primary mt-4"
+            >
+              View All Articles
+            </button>
+          </div>
+        </section>
+      )}
 
       {/* Newsletter Signup */}
       <section className="py-20 bg-base-200">
