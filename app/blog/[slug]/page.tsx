@@ -113,6 +113,13 @@ const getBlogPost = (slug: string) => {
   return blogPosts.find(post => post.slug === slug);
 };
 
+export async function generateStaticParams() {
+  return [
+    { slug: 'scalable-react-applications-2024' },
+    { slug: 'nextjs-14-features-performance' }
+  ];
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = getBlogPost(params.slug);
   
