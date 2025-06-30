@@ -51,9 +51,9 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'Waduzzaman@example.com',
+      value: 'mwaduzzaman@gmail.com',
       description: 'Best for detailed project discussions',
-      href: 'mailto:Waduzzaman@example.com',
+      href: 'mailto:mwaduzzaman@gmail.com',
       color: 'text-blue-600'
     },
     {

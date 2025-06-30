@@ -88,7 +88,7 @@ const Hero = () => {
                 <Linkedin className="w-6 h-6" />
               </a>
               <a
-                href="mailto:Waduzzaman@example.com"
+                href="mailto:mwaduzzaman@gmail.com"
                 className="btn btn-ghost btn-circle btn-lg hover:text-primary hover:bg-primary/10 transition-all duration-200"
                 aria-label="Email"
               >

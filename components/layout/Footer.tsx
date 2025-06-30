@@ -22,7 +22,7 @@ const Footer = () => {
     { name: 'GitHub', href: '#', icon: Github },
     { name: 'LinkedIn', href: '#', icon: Linkedin },
     { name: 'Twitter', href: '#', icon: Twitter },
-    { name: 'Email', href: 'mailto:Waduzzaman@example.com', icon: Mail },
+    { name: 'Email', href: 'mailto:mwaduzzaman@gmail.com', icon: Mail },
   ];
 
   return (
@@ -95,11 +95,11 @@ const Footer = () => {
             <h3 className="font-semibold text-base-content mb-4">Get In Touch</h3>
             <div className="space-y-3">
               <a
-                href="mailto:Waduzzaman@example.com"
+                href="mailto:mwaduzzaman@gmail.com"
                 className="flex items-center space-x-2 text-base-content/70 hover:text-primary transition-colors duration-200 text-sm group"
               >
                 <Mail className="w-4 h-4" />
-                <span>Waduzzaman@example.com</span>
+                <span>mwaduzzaman@gmail.com</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <Link
